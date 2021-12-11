@@ -12,8 +12,8 @@ public class Board {
     /**
      * The grid of squares with board[x][y] being the square at column x, row y.
      */
-    private final Square[][] board;
-
+    private final Square[][] boardObj;
+   //not sure why this is a ba dcode smell but this seemed to be the simplest change I could make
     /**
      * Creates a new board.
      *
@@ -24,7 +24,7 @@ public class Board {
     @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     Board(Square[][] grid) {
         assert grid != null;
-        this.board = grid;
+        this.boardObj = grid;
         assert invariant() : "Initial grid cannot contain null squares";
     }
 
@@ -37,7 +37,7 @@ public class Board {
      * is called from the constructor, i.e., that the object "this" is still in the making.
      */
     protected final boolean invariant(@UnderInitialization(Board.class) Board this) {
-        for (Square[] row : board) {
+        for (Square[] row : boardObj) {
             for (Square square : row) {
                 if (square == null) {
                     return false;
@@ -53,7 +53,7 @@ public class Board {
      * @return The width of this board.
      */
     public int getWidth() {
-        return board.length;
+        return boardObj.length;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Board {
      * @return The height of this board.
      */
     public int getHeight() {
-        return board[0].length;
+        return boardObj[0].length;
     }
 
     /**
@@ -79,7 +79,7 @@ public class Board {
      */
     public Square squareAt(int x, int y) {
         assert withinBorders(x, y);
-        Square result = board[x][y];
+        Square result = boardObj[x][y];
         assert result != null : "Follows from invariant.";
         return result;
     }
